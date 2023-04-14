@@ -1,0 +1,52 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.todocontainer{
+    display: flex;
+    background-color: #FEF7F7;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.formholder{
+    display: flex;
+    gap: 5rem;
+    background-color: #DF7C78;
+    padding: 3rem;
+    border-radius:2rem ;
+}
+
+.formdata{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+input[type=text]{
+    border-radius: 1rem;
+    border: none;
+    padding: 0.5rem;
+    outline: none;
+}
+
+input[type=text]:active, input[type="text"]:focus{
+    border-radius: 1rem;
+    border: none;
+}
+
+button{
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    border: none;
+    cursor: pointer;
+    background-color: #F8D1D1;
+}
+
+.butcontainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

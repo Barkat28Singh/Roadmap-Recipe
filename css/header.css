@@ -1,0 +1,16 @@
+body{
+    padding: 0;
+    margin: 0;
+    background-color: #FEF7F7;
+}
+
+nav{
+    display: flex;
+    flex-direction: row;
+    background-color: #DF7C78;
+}
+
+li{
+    list-style: none;
+    cursor: pointer;
+}
