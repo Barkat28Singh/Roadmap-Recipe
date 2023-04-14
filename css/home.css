@@ -29,7 +29,7 @@ img{
 .todocontainer{
     display: flex;
     background-color: #FEF7F7;
-    background-image:linear-gradient(rgb(246, 216, 216), rgba(60, 60, 60, 0.5)) ,url('/pexels-ella-olsson-3026802.jpg');
+    background-image:linear-gradient(rgb(246, 216, 216), rgba(60, 60, 60, 0.5)) ,url('/assets/pexels-ella-olsson-3026802.jpg');
     height: 100vh;
     justify-content: center;
     align-items: center;
