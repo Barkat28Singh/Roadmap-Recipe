@@ -1,12 +1,16 @@
 const express = require("express");
 const mysql = require("mysql");
 const bodyParser = require("body-parser");
+const path = require("path");
 require("dotenv").config();
 
 const router = express.Router();
 const app = express();
 
 app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "assets")));
+app.use(express.static(path.join(__dirname, "/")));
+app.use(express.static("/"));
 app.set("view engine", "ejs");
 
 app.use(bodyParser.json());
@@ -28,7 +32,25 @@ connection.connect((err) => {
   }
   console.log("Connected to the database");
 });
+router.get("/", function (req, res) {
+  const queryStr = "SELECT * FROM Recipe ORDER BY id ASC";
 
+  connection.query(queryStr, (err, result) => {
+    if (err) {
+      throw err;
+    }
+    console.log("result", result);
+    res.render("home", { Recipe: result });
+  });
+});
+
+router.get("/home", function (req, res) {
+  res.render("home");
+});
+
+router.get("/list_of_recipes", function (req, res) {
+  res.render("list_of_recipes");
+});
 app.use("/", router);
 
 app.listen(SERVER_PORT);
