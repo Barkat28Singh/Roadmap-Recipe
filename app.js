@@ -51,6 +51,13 @@ router.get("/home", function (req, res) {
 router.get("/list_of_recipes", function (req, res) {
   res.render("list_of_recipes");
 });
+
+
+router.get("/recipe_edit_page", (req, res) => {
+  res.render("recipe_edit_page")
+})
+
+
 app.use("/", router);
 
 app.listen(SERVER_PORT);
