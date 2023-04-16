@@ -33,14 +33,14 @@ connection.connect((err) => {
   console.log("Connected to the database");
 });
 router.get("/", function (req, res) {
-  const queryStr = "SELECT * FROM Recipe ORDER BY id ASC";
+  const queryStr = "SELECT * FROM recipe ORDER BY id ASC";
 
   connection.query(queryStr, (err, result) => {
     if (err) {
       throw err;
     }
     console.log("result", result);
-    res.render("home", { Recipe: result });
+    res.render("home", { recipe: result });
   });
 });
 
@@ -48,19 +48,39 @@ router.get("/home", function (req, res) {
   res.render("home");
 });
 
-
 router.get("/list_of_recipes", function (req, res) {
   res.render("list_of_recipes");
 });
-
-// route to recipe edit page
-router.get("/recipe_edit_page", (req, res) => {
-  res.render("recipe_edit_page")
-})
-
-
-
 app.use("/", router);
+
+router.get("/home", function (req, res) {
+  res.render("home");
+});
+router.get("/recipe/:id", function (req, res) {
+  // console.log("id:", req.params.id);
+  const queryStr = `SELECT * FROM recipe WHERE id='${req.params.id}';`;
+
+  connection.query(queryStr, (err, result) => {
+    if (err) {
+      return console.log("err", err);
+    }
+    res.render("recipe", { recipe: result[0] });
+  });
+});
+router.post("/home", function (req, res) {
+  // console.log("colour:", req.body.name);
+  const queryStr = `INSERT INTO recipe (name) VALUES ("${req.body.name}")`;
+
+  connection.query(queryStr, (err, result) => {
+    if (err) {
+      throw err;
+    }
+    res.writeHead(302, {
+      Location: "/",
+    });
+    res.end();
+  });
+});
 
 app.listen(SERVER_PORT);
 console.log(`Server is running on port ${SERVER_PORT}`);
