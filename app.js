@@ -48,14 +48,16 @@ router.get("/home", function (req, res) {
   res.render("home");
 });
 
+
 router.get("/list_of_recipes", function (req, res) {
   res.render("list_of_recipes");
 });
 
-
+// route to recipe edit page
 router.get("/recipe_edit_page", (req, res) => {
   res.render("recipe_edit_page")
 })
+
 
 
 app.use("/", router);
