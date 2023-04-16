@@ -1,42 +1,42 @@
 <%- include('header.ejs') %>
 
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
 
-    .main {
-        min-height: 85%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
+        .main {
+            min-height: 85%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
 
-    .wrapper {
-        display: flex;
-        justify-content: center;
-        min-width: 60%;
-        max-width: 80%;
-        min-height: 15rem;
-        max-height: 20rem;
-        border-radius: 2rem;
-        opacity: 0.8;
-        background-color: #DF7C78;
-        padding: 1rem;
-    }
+        .wrapper {
+            display: flex;
+            justify-content: center;
+            min-width: 60%;
+            max-width: 80%;
+            min-height: 15rem;
+            max-height: 20rem;
+            border-radius: 2rem;
+            opacity: 0.8;
+            background-color: #DF7C78;
+            padding: 1rem;
+        }
 
-    .left {
-        display: flex;
-        flex-direction: column;
-        width: 30%;
-    }
+        .left {
+            display: flex;
+            flex-direction: column;
+            width: 30%;
+        }
 
-    .right {
-        display: flex;
-        flex-direction: column;
-    }
+        .right {
+            display: flex;
+            flex-direction: column;
+        }
 
-    .update {
-        border-radius: 0.5rem;
+        .update {
+            border-radius: 0.5rem;
 
             padding: 0.5rem;
             border: none;
@@ -45,7 +45,7 @@
             color: #DF7C78;
             font-family: 'Itim', cursive;
             font-size: large;
-            
+
         }
 
         .box {
@@ -56,9 +56,10 @@
             width: 25rem;
         }
 
-     
-        
-        textarea, input[type=text] {
+
+
+        textarea,
+        input[type=text] {
             border-radius: 1rem;
             border: none;
             padding: 0.5rem;
@@ -66,7 +67,8 @@
             text-align: center;
         }
 
-        textarea, input[type=text]:active,
+        textarea,
+        input[type=text]:active,
         input[type="text"]:focus {
             border-radius: 1rem;
             border: none;
@@ -78,10 +80,7 @@
             width: 25rem;
             justify-content: flex-end;
         }
-
-    
-       
-</style>
+    </style>
 
     <div class="main">
         <h1>Recipe Name</h1>
@@ -89,7 +88,9 @@
             <div class="left">
                 <p>Time: 15</p>
                 <p>Ingredients:eggs</p>
-                <p>Instructions: Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, atque. Quisquam voluptatum quibusdam inventore fuga architecto doloremque, quas eos minus. Iure quisquam facilis sed. Doloribus maiores suscipit soluta assumenda sequi?</p>
+                <p>Instructions: Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, atque. Quisquam
+                    voluptatum quibusdam inventore fuga architecto doloremque, quas eos minus. Iure quisquam facilis
+                    sed. Doloribus maiores suscipit soluta assumenda sequi?</p>
             </div>
             <div class="right">
                 <div class="box">
@@ -98,7 +99,7 @@
                 </div>
                 <div class="box">
                     <h4>Ingredients:</h4>
-                    <input type="text" >
+                    <input type="text">
                 </div>
                 <div class="box">
                     <h4>Instructions:</h4>
@@ -111,10 +112,7 @@
         </div>
 
     </div>
-   
+
     <%- include('footer.ejs') %>
 
-</body>
-
-
-
+        </body>
