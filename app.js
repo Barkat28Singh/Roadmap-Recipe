@@ -56,6 +56,11 @@ app.use("/", router);
 router.get("/home", function (req, res) {
   res.render("home");
 });
+
+router.get("/recipe_edit_page", function (req, res) {
+  res.render("recipe_edit_page");
+});
+
 router.get("/recipe/:id", function (req, res) {
   // console.log("id:", req.params.id);
   const queryStr = `SELECT * FROM recipe WHERE id='${req.params.id}';`;
@@ -67,16 +72,20 @@ router.get("/recipe/:id", function (req, res) {
     res.render("recipe", { recipe: result[0] });
   });
 });
-router.post("/home", function (req, res) {
-  // console.log("colour:", req.body.name);
-  const queryStr = `INSERT INTO recipe (name) VALUES ("${req.body.name}")`;
+router.post("/list_of_recipes", function (req, res) {
+  console.log("RECIPE:", req.body.Name);
+  
+  const queryStr = `INSERT INTO recipe (Name,Time,Ingredients,Instructions) VALUES ("${req.body.Name}","${req.body.Time}","${req.body.Ingredients}","${req.body.Instructions}")`;
 
+
+  
   connection.query(queryStr, (err, result) => {
+    console.log("Connected to database");
     if (err) {
       throw err;
     }
     res.writeHead(302, {
-      Location: "/",
+      Location: "/list_of_recipes",
     });
     res.end();
   });

@@ -2,26 +2,28 @@
     <div class="todocontainer">
         <div class="formholder">
 
-            <form class="formdata" action="/list-of-recipes">
-                <h1>Recipe Roadmap</h1>
-                <div class="logocontainer">
+            <div class="logocontainer">
                     <img src="/assets/Group 1.svg" alt="">
+                    <h1>Recipe Roadmap</h1>
                 </div>
+            <form class="formdata" action="/list_of_recipes" method="POST">
+                
+                
                 <div>
-                    <label for="recipername">Recipe Name :</label>
+                    <label for="Name">Recipe Name :</label>
                     <input type="text" name="Name">
                 </div>
                 <div>
-                    <label for="mealtime">Meal Time : </label>
-                    <input type="text" name="Time">
+                    <label for="Time">Meal Time (mins) : </label>
+                    <input type="number" name="Time">
                 </div>
                 <div>
-                    <label for="ingredients">Ingredients : </label>
+                    <label for="Ingredients">Ingredients : </label>
                     <input type="text" name="Ingredients">
                 </div>
-                <div>
-                    <label for="instructions">Instructions : </label>
-                    <input type="text" name="Instructions">
+                <div class="instructions">
+                    <label for="Instructions">Instructions : </label>
+                    <textarea cols="20" rows="5" name="Instructions"></textarea>
                 </div>
                 <div class="butcontainer">
                     <button type="submit">Add Recipe</button>
@@ -51,8 +53,10 @@
 
         .logocontainer {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+            margin-bottom: 1rem;
         }
 
         img {
@@ -71,29 +75,29 @@
 
         .formholder {
             display: flex;
-            gap: 5rem;
+            flex-direction: column;
             opacity: 0.8;
             background-color: #DF7C78;
-            padding: 3rem;
             border-radius: 2rem;
+            padding: 2rem;
         }
 
         .formdata {
             display: flex;
             flex-direction: column;
             gap: 2rem;
-            justify-content: center;
-            align-items: center;
+            justify-content: flex-end;
+            align-items: flex-end;
         }
 
-        input[type=text] {
+        textarea,input[type=text],input[type=number] {
             border-radius: 1rem;
             border: none;
             padding: 0.5rem;
             outline: none;
         }
 
-        input[type=text]:active,
+        textarea,input[type=text]:active,
         input[type="text"]:focus {
             border-radius: 1rem;
             border: none;
@@ -107,14 +111,21 @@
             background-color: #F8D1D1;
             color: #DF7C78;
             font-family: 'Itim', cursive;
+            
         }
 
         .butcontainer {
             display: flex;
             justify-content: center;
             align-items: center;
-
+            margin-right: 35%;
         }
+
+        .instructions{
+            display: flex;
+            align-items: center;
+        }
+
     </style>
 
     <%- include('footer.ejs') %>
