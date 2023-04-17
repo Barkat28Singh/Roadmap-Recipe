@@ -4,30 +4,28 @@
         @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
 
         .main {
-            min-height: 85%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            margin-bottom: 1rem;
         }
 
         .wrapper {
             display: flex;
             justify-content: center;
-            min-width: 60%;
-            max-width: 80%;
-            min-height: 15rem;
-            max-height: 20rem;
+            width: 60rem;
             border-radius: 2rem;
             opacity: 0.8;
             background-color: #DF7C78;
             padding: 1rem;
+            margin-bottom: 1rem;
         }
 
         .left {
             display: flex;
             flex-direction: column;
-            width: 30%;
+            width: 25rem;
         }
 
         .right {
@@ -37,7 +35,6 @@
 
         .update {
             border-radius: 0.5rem;
-
             padding: 0.5rem;
             border: none;
             cursor: pointer;
@@ -83,32 +80,40 @@
     </style>
 
     <div class="main">
-        <h1>Recipe Name</h1>
+        <h1>
+            <%=recipe.Name%>
+        </h1>
         <div class="wrapper">
             <div class="left">
-                <p>Time: 15</p>
-                <p>Ingredients:eggs</p>
-                <p>Instructions: Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, atque. Quisquam
-                    voluptatum quibusdam inventore fuga architecto doloremque, quas eos minus. Iure quisquam facilis
-                    sed. Doloribus maiores suscipit soluta assumenda sequi?</p>
+                <p>Time: <%=recipe.Time%> mins
+                </p>
+                <p>Ingredients: <%=recipe.Ingredients%>
+                </p>
+                <p>Instructions: <%=recipe.Instructions%>
+                </p>
             </div>
-            <div class="right">
-                <div class="box">
-                    <h4>Total time to prepare:</h4>
-                    <input type="text">
+            <form action="/update-recipe" method="POST">
+                <div class="right">
+                    <div class="box">
+                        <h4>Meal Time (mins) :
+                        </h4>
+                        <input type="number" name="Time">
+                    </div>
+                    <div class="box">
+                        <h4>Ingredients :
+                        </h4>
+                        <input type="text" name="Ingredients">
+                    </div>
+                    <div class="box">
+                        <h4>Instructions :
+                        </h4>
+                        <textarea name="Instructions" cols="20" rows="5"></textarea>
+                    </div>
+                    <div class="btn">
+                        <button type="submit" class="update">Update</button>
+                    </div>
                 </div>
-                <div class="box">
-                    <h4>Ingredients:</h4>
-                    <input type="text">
-                </div>
-                <div class="box">
-                    <h4>Instructions:</h4>
-                    <textarea name="instructions" cols="20" rows="4"></textarea>
-                </div>
-                <div class="btn">
-                    <button class="update">update</button>
-                </div>
-            </div>
+            </form>
         </div>
 
     </div>

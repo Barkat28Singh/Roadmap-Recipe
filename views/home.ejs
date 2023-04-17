@@ -3,12 +3,12 @@
         <div class="formholder">
 
             <div class="logocontainer">
-                    <img src="/assets/Group 1.svg" alt="">
-                    <h1>Recipe Roadmap</h1>
-                </div>
-            <form class="formdata" action="/list_of_recipes" method="POST">
-                
-                
+                <img src="/assets/Group 1.svg" alt="">
+                <h1>Recipe Roadmap</h1>
+            </div>
+            <form class="formdata" action="/submit" method="POST">
+
+
                 <div>
                     <label for="Name">Recipe Name :</label>
                     <input type="text" name="Name">
@@ -30,6 +30,7 @@
                 </div>
             </form>
         </div>
+
     </div>
     </body>
     <style>
@@ -90,14 +91,17 @@
             align-items: flex-end;
         }
 
-        textarea,input[type=text],input[type=number] {
+        textarea,
+        input[type=text],
+        input[type=number] {
             border-radius: 1rem;
             border: none;
             padding: 0.5rem;
             outline: none;
         }
 
-        textarea,input[type=text]:active,
+        textarea,
+        input[type=text]:active,
         input[type="text"]:focus {
             border-radius: 1rem;
             border: none;
@@ -111,7 +115,7 @@
             background-color: #F8D1D1;
             color: #DF7C78;
             font-family: 'Itim', cursive;
-            
+
         }
 
         .butcontainer {
@@ -121,11 +125,10 @@
             margin-right: 35%;
         }
 
-        .instructions{
+        .instructions {
             display: flex;
             align-items: center;
         }
-
     </style>
 
     <%- include('footer.ejs') %>

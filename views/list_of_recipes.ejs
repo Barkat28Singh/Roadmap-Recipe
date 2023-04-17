@@ -3,30 +3,32 @@
         <div id="container">
             <h1 id="container-title">List of Recipes</h1>
             <div id="list-container">
-                <form id="form-control" action="#">
-                    <div class="row">
-                        <input class="radio" type="radio" value="Roti">
-                        <a href="/recipe_edit_page" class="item">Roti</a>
-                    </div>
-                    <div class="row">
-                        <input class="radio" type="radio" value="Jerk Chicken">
-                        <a href="/recipe_edit_page" class="item">Jerk Chicken</a>
-                    </div>
-                    <div class="row">
-                        <input class="radio" type="radio" value="Cereal">
-                        <a href="/recipe_edit_page" class="item">Cereal</a>
-                    </div>
-                    <div class="row">
-                        <input class="radio" type="radio" value="Omlette du fromage">
-                        <a href="/recipe_edit_page" class="item">Omlette du fromage</a>
-                    </div>
-            </div>
-            <div id="button-row-container">
-                <button id="delete">Delete</button>
-            </div>
-            </form>
+                <form id="form-control">
+                    <% if(recipe.length> 0) {%>
 
+                        <% recipe.forEach((item)=> { %>
+                            <div class="row">
+                                <input class="radio" type="radio" value="<%=item.id %>">
+                                <a href="/recipe_edit_page/<%=item.id %>" class="item">
+                                    <%=item.Name %>
+                                </a>
+                            </div>
 
+                            <% }); %>
+                                <% } else { %>
+                                    <div class="row">
+                                        <input class="radio" type="radio">
+                                        <a href="/home" class="item">
+                                            No Recipes found, Please add a recipe in the previous form.
+                                        </a>
+                                    </div>
+                                    <% } %>
+                                        <div id="button-row-container">
+                                            <button id="delete">Delete</button>
+                                        </div>
+
+                </form>
+            </div>
         </div>
     </div>
 
@@ -105,7 +107,7 @@
 
 
         .item {
-            width: 50rem;
+            width: 47rem;
             background-color: #E49E9C;
             border-radius: 10px;
             font-size: 1.5rem;
@@ -140,4 +142,38 @@
             font-size: large;
         }
     </style>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            console.log("Loaded!");
+            const deleteBtn = document.getElementById("delete");
+            const selected = document.getElementsByClassName("radio")
+
+
+            const deleteBtnClickHandler = (event) => {
+                console.log("pressed delete!");
+                // if (selected.value == event.currentTarget.id) {
+                //     console.log("Ids match")
+
+                fetch("/delete-colour", {
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ id: event.currentTarget.id }),
+                })
+                    .then(() => {
+                        window.location.reload();
+                    })
+                    .catch((err) => console.log("err", err));
+                console.log("event", event.currentTarget.id);
+            };
+
+
+            deleteBtn.addEventListener("click", deleteBtnClickHandler);
+
+        });
+
+    </script>
+
     <%- include('footer.ejs') %>

@@ -32,6 +32,29 @@ connection.connect((err) => {
   }
   console.log("Connected to the database");
 });
+
+//Navbar Links redirection
+
+router.get("/home", function (req, res) {
+  res.render("home");
+});
+
+router.get("/list_of_recipes", function (req, res) {
+  const queryStr = `SELECT * FROM recipe ORDER BY id ASC`;
+
+  connection.query(queryStr, (err, result) => {
+    if (err) {
+      throw err;
+    }
+    console.log("result", result);
+    res.render("list_of_recipes", { recipe: result });
+  });
+});
+
+//STARTING
+
+//starting server route and and forming connection to DB on home page
+app.use("/", router);
 router.get("/", function (req, res) {
   const queryStr = "SELECT * FROM recipe ORDER BY id ASC";
 
@@ -39,29 +62,35 @@ router.get("/", function (req, res) {
     if (err) {
       throw err;
     }
-    console.log("result", result);
     res.render("home", { recipe: result });
   });
 });
 
-router.get("/home", function (req, res) {
-  res.render("home");
+//INSERTING
+
+//Creating/inserting data into mysql database
+router.post("/submit", function (req, res) {
+  console.log("RECIPE:", req.body.Name);
+
+  const queryStr = `INSERT INTO recipe (Name,Time,Ingredients,Instructions) VALUES ("${req.body.Name}","${req.body.Time}","${req.body.Ingredients}","${req.body.Instructions}")`;
+
+  connection.query(queryStr, (err, result) => {
+    console.log("Connected to database");
+    if (err) {
+      throw err;
+    }
+    res.writeHead(302, {
+      Location: "/",
+    });
+    res.end();
+  });
 });
 
-router.get("/list_of_recipes", function (req, res) {
-  res.render("list_of_recipes");
-});
-app.use("/", router);
+//Getting and Displaying
 
-router.get("/home", function (req, res) {
-  res.render("home");
-});
+//Routing to a specific recipe information page with data retrived from database
 
-router.get("/recipe_edit_page", function (req, res) {
-  res.render("recipe_edit_page");
-});
-
-router.get("/recipe/:id", function (req, res) {
+router.get("/recipe_edit_page/:id", function (req, res) {
   // console.log("id:", req.params.id);
   const queryStr = `SELECT * FROM recipe WHERE id='${req.params.id}';`;
 
@@ -69,27 +98,42 @@ router.get("/recipe/:id", function (req, res) {
     if (err) {
       return console.log("err", err);
     }
-    res.render("recipe", { recipe: result[0] });
+    res.render("recipe_edit_page", { recipe: result[0] }); //Giving the first input (i.e.) the latest input id
   });
 });
-router.post("/list_of_recipes", function (req, res) {
-  console.log("RECIPE:", req.body.Name);
-  
-  const queryStr = `INSERT INTO recipe (Name,Time,Ingredients,Instructions) VALUES ("${req.body.Name}","${req.body.Time}","${req.body.Ingredients}","${req.body.Instructions}")`;
 
+//Updating the information of a Recipe
 
-  
-  connection.query(queryStr, (err, result) => {
-    console.log("Connected to database");
-    if (err) {
-      throw err;
-    }
-    res.writeHead(302, {
-      Location: "/list_of_recipes",
-    });
-    res.end();
-  });
-});
+// router.post("/update-recipe", function (req, res) {
+//   // console.log("colour:", req.body.name);
+//   const queryStr = `UPDATE recipe Time = '${req.body.Time}', Instructions = '${req.body.Instructions}', Ingredients = '${req.body.Ingredients}`;
+
+//   connection.query(queryStr, (err, result) => {
+//     if (err) {
+//       throw err;
+//     }
+//     res.writeHead(302, {
+//       Location: "recipe_edit_page",
+//     });
+//     res.end();
+//   });
+// });
+
+//Deleting selcted a record from the database
+
+// router.post("/delete-colour", function (req, res) {
+//   const queryStr = `DELETE FROM recipe WHERE id = '${req.body.id}'`; //req.body is requesting something from that html/ejs file and then the "name"
+
+//   connection.query(queryStr, (err, result) => {
+//     if (err) {
+//       throw err;
+//     }
+//     res.writeHead(302, {
+//       Location: "/", //hOMEPAGE
+//     });
+//     res.end();
+//   });
+// });
 
 app.listen(SERVER_PORT);
 console.log(`Server is running on port ${SERVER_PORT}`);
