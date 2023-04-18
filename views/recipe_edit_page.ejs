@@ -3,9 +3,10 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
 
-        html{
+        html {
             height: 100%;
         }
+
         .main {
             display: flex;
             flex-direction: column;
@@ -60,12 +61,13 @@
 
 
         textarea,
-        input[type=text],input[type=number] {
+        input[type=text],
+        input[type=number] {
             border-radius: 1rem;
             border: none;
             padding: 0.5rem;
             outline: none;
-           }
+        }
 
         textarea,
         input[type=text]:active,
@@ -80,69 +82,54 @@
             width: 25rem;
             justify-content: flex-end;
         }
-
-        #updaterecipe{
-            width: max-content;
-            border-radius: 0.5rem;
-            padding: 0.5rem;
-            border: none;
-            cursor: pointer;
-            background-color: #F8D1D1;
-            color: #DF7C78;
-            font-family: 'Itim', cursive;
-            font-size: large;
-        }
     </style>
-<html>
-<body>
-    <div class="main">
-        <h1>
-            <%=recipe.Name%>
-        </h1>
-        <div class="wrapper">
-            <div class="left">
-                <p>Time: <%=recipe.Time%> mins
-                </p>
-                <p>Ingredients: <%=recipe.Ingredients%>
-                </p>
-                <p>Instructions: <%=recipe.Instructions%>
-                </p>
-                
-            </div>
-            <form action="/update-recipe" method="POST">
-                <div class="right">
-                    
-                    <div class="box">
-                        <input type="hidden" name="id" value="<%= recipe.id %>"/>
+    <html>
 
-                        <h4>Meal Time (mins) :
-                        </h4>
-                        <input type="number" value="<%=recipe.Time%>" name="Time">
-                    </div>
-                    <div class="box">
-                        <h4>Ingredients :
-                        </h4>
-                        <input type="text" value="<%=recipe.Ingredients%>" name="Ingredients">
-                    </div>
-                    <div class="box">
-                        <h4>Instructions :
-                        </h4>
-                        <textarea name="Instructions"  cols="20" rows="5"><%=recipe.Instructions%></textarea>
-                    </div>
-                    <div class="btn">
-                        <button type="submit" class="update">Update</button>
-                    </div>
+    <body>
+        <div class="main">
+            <h1>
+                <%=recipe.Name%>
+            </h1>
+            <div class="wrapper">
+                <div class="left">
+                    <p>Time: <%=recipe.Time%> mins
+                    </p>
+                    <p>Ingredients: <%=recipe.Ingredients%>
+                    </p>
+                    <p>Instructions: <%=recipe.Instructions%>
+                    </p>
+
                 </div>
-            </form>
+                <form action="/update-recipe" method="POST">
+                    <div class="right">
+
+                        <div class="box">
+                            <input type="hidden" name="id" value="<%= recipe.id %>" />
+
+                            <h4>Meal Time (mins) :
+                            </h4>
+                            <input type="number" value="<%=recipe.Time%>" name="Time">
+                        </div>
+                        <div class="box">
+                            <h4>Ingredients :
+                            </h4>
+                            <input type="text" value="<%=recipe.Ingredients%>" name="Ingredients">
+                        </div>
+                        <div class="box">
+                            <h4>Instructions :
+                            </h4>
+                            <textarea name="Instructions" cols="20" rows="5"><%=recipe.Instructions%></textarea>
+                        </div>
+                        <div class="btn">
+                            <button type="submit" class="update">Update</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
         </div>
+    </body>
 
-    </div>
-</body>
-
-</html>
+    </html>
 
     <%- include('footer.ejs') %>
-
-
-
-        
