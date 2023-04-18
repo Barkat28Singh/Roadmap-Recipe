@@ -110,7 +110,7 @@ router.post("/update-recipe", function (req, res) {
   // console.log("colour:", req.body.name);
   // const queryStr = `UPDATE recipe SET Time = '${req.body.Time}', Instructions = '${req.body.Instructions}', Ingredients = '${req.body.Ingredients}' WHERE id = '${req.body.id}'`;
 
-  const queryStr = `UPDATE recipe SET Time = '${req.body.Time}' WHERE id = '${req.body.id}'`;
+  const queryStr = `UPDATE recipe SET Time = '${req.body.Time}' ,Instructions = '${req.body.Instructions}',Ingredients = '${req.body.Ingredients}' WHERE id = '${req.body.id}'`;
   console.log(req.body.Time)
   connection.query(queryStr, (err, result) => {
     if (err) {
