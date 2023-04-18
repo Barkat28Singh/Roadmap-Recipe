@@ -2,8 +2,8 @@ const express = require("express");
 const mysql = require("mysql");
 const bodyParser = require("body-parser");
 const path = require("path");
+// const alert = require("alert")
 require("dotenv").config();
-
 const router = express.Router();
 const app = express();
 
@@ -46,9 +46,9 @@ router.get("/list_of_recipes", function (req, res) {
     if (err) {
       throw err;
     }
-    console.log("result", result);
+    
     res.render("list_of_recipes", { recipe: result });
-  });
+  }) ;
 });
 
 //STARTING
@@ -62,6 +62,8 @@ router.get("/", function (req, res) {
       throw err;
     }
     console.log('result', result)
+    // res.jsonp({success : true})
+   
     res.render("home", { recipe: result });
   });
 });
@@ -102,22 +104,25 @@ router.get("/recipe_edit_page/:id", function (req, res) {
   });
 });
 
-//Updating the information of a Recipe
+// Updating the information of a Recipe
 
-// router.post("/update-recipe", function (req, res) {
-//   // console.log("colour:", req.body.name);
-//   const queryStr = `UPDATE recipe Time = '${req.body.Time}', Instructions = '${req.body.Instructions}', Ingredients = '${req.body.Ingredients}`;
+router.post("/update-recipe", function (req, res) {
+  // console.log("colour:", req.body.name);
+  // const queryStr = `UPDATE recipe SET Time = '${req.body.Time}', Instructions = '${req.body.Instructions}', Ingredients = '${req.body.Ingredients}' WHERE id = '${req.body.id}'`;
 
-//   connection.query(queryStr, (err, result) => {
-//     if (err) {
-//       throw err;
-//     }
-//     res.writeHead(302, {
-//       Location: "recipe_edit_page",
-//     });
-//     res.end();
-//   });
-// });
+  const queryStr = `UPDATE recipe SET Time = '${req.body.Time}' WHERE id = '${req.body.id}'`;
+  console.log(req.body.Time)
+  connection.query(queryStr, (err, result) => {
+    if (err) {
+      throw err;
+    }
+    
+    res.writeHead(302, {
+      Location: "list_of_recipes",
+    });
+    res.end();
+  });
+});
 
 // Deleting selected a record from the database
 
