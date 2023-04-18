@@ -80,6 +80,18 @@
             width: 25rem;
             justify-content: flex-end;
         }
+
+        #updaterecipe{
+            width: max-content;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            border: none;
+            cursor: pointer;
+            background-color: #F8D1D1;
+            color: #DF7C78;
+            font-family: 'Itim', cursive;
+            font-size: large;
+        }
     </style>
 <html>
 <body>
@@ -95,6 +107,7 @@
                 </p>
                 <p>Instructions: <%=recipe.Instructions%>
                 </p>
+                <button id="updaterecipe" class="update"> Update Recipe</button>
             </div>
             <form action="/update-recipe" method="POST">
                 <div class="right">
