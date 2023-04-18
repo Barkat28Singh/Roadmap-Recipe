@@ -54,7 +54,6 @@ router.get("/list_of_recipes", function (req, res) {
 //STARTING
 
 //starting server route and and forming connection to DB on home page
-app.use("/", router);
 router.get("/", function (req, res) {
   const queryStr = "SELECT * FROM recipe ORDER BY id ASC";
 
@@ -62,6 +61,7 @@ router.get("/", function (req, res) {
     if (err) {
       throw err;
     }
+    console.log('result', result)
     res.render("home", { recipe: result });
   });
 });
@@ -119,21 +119,21 @@ router.get("/recipe_edit_page/:id", function (req, res) {
 //   });
 // });
 
-//Deleting selcted a record from the database
+// Deleting selected a record from the database
 
-// router.post("/delete-colour", function (req, res) {
-//   const queryStr = `DELETE FROM recipe WHERE id = '${req.body.id}'`; //req.body is requesting something from that html/ejs file and then the "name"
+router.post("/delete-recipe", function (req, res) {
+  const queryStr = `DELETE FROM recipe WHERE id = ${req.body.id}`; //req.body is requesting something from that html/ejs file and then the "name"
 
-//   connection.query(queryStr, (err, result) => {
-//     if (err) {
-//       throw err;
-//     }
-//     res.writeHead(302, {
-//       Location: "/", //hOMEPAGE
-//     });
-//     res.end();
-//   });
-// });
+  connection.query(queryStr, (err, result) => {
+    if (err) {
+      throw err;
+    }
+    res.writeHead(204);
+    res.end();
+  });
+});
+
+app.use("/", router);
 
 app.listen(SERVER_PORT);
 console.log(`Server is running on port ${SERVER_PORT}`);

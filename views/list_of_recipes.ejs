@@ -8,24 +8,25 @@
 
                         <% recipe.forEach((item)=> { %>
                             <div class="row">
-                                <input class="radio" type="radio" value="<%=item.id %>">
+                                <!-- <input class="radio" type="radio" value="<%=item.id %>"> -->
                                 <a href="/recipe_edit_page/<%=item.id %>" class="item">
                                     <%=item.Name %>
                                 </a>
+                                <span class="delete" id="<%= item.id %>">Delete</span>
+
                             </div>
 
                             <% }); %>
                                 <% } else { %>
                                     <div class="row">
-                                        <input class="radio" type="radio">
+                                        <!-- <input class="radio" type="radio"> -->
                                         <a href="/home" class="item">
                                             No Recipes found, Please add a recipe in the previous form.
                                         </a>
                                     </div>
                                     <% } %>
-                                        <div id="button-row-container">
-                                            <button id="delete">Delete</button>
-                                        </div>
+                                    <div id="button-row-container">
+                                    </div>
 
                 </form>
             </div>
@@ -132,7 +133,7 @@
         }
 
 
-        #delete {
+        .delete {
             padding: 0.5rem;
             border: none;
             cursor: pointer;
@@ -145,16 +146,16 @@
     <script>
         window.addEventListener("DOMContentLoaded", () => {
             console.log("Loaded!");
-            const deleteBtn = document.getElementById("delete");
-            const selected = document.getElementsByClassName("radio")
+            const deleteBtnArr = document.getElementsByClassName("delete");
+            // const selected = document.getElementsByClassName("radio")
 
 
             const deleteBtnClickHandler = (event) => {
-                console.log("pressed delete!");
+                // console.log("pressed delete!");
                 // if (selected.value == event.currentTarget.id) {
                 //     console.log("Ids match")
 
-                fetch("/delete-colour", {
+                fetch("/delete-recipe", {
                     method: "POST",
                     headers: {
                         Accept: "application/json",
@@ -170,9 +171,11 @@
             };
 
 
-            deleteBtn.addEventListener("click", deleteBtnClickHandler);
-
-        });
+            Array.from(deleteBtnArr).forEach((deleteBtn) => {
+    //   console.log("deleteBtn", deleteBtn);
+      deleteBtn.addEventListener("click", deleteBtnClickHandler);
+    });
+  });
 
     </script>
 
